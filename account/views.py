@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm
+from .models import Profile
 
 # Create your views here.
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -45,6 +47,7 @@ def register(request):
             )
             #save the User Object
             new_user.save()
+            Profile.objects.create(user=new_user)
             return render(request,
                           'account/register_done.html',
                           {'user_form': new_user})
@@ -55,4 +58,3 @@ def register(request):
     return render(request,
                   'account/register.html',
                   {'user_form': user_form})
-
