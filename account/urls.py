@@ -36,7 +36,12 @@ urlpatterns = [
     #    path('', include('django.contrib.auth.urls')),
     
     #register
-    path('register/', views.register, name="register")
+    path('register/', views.register, name="register"),
+    
+    #edit profile
+    path('edit/', views.edit, name='edit'),
+    
+    path('social-auth/',include('social_django.urls', namespace='social')),
     
 ]
 
